@@ -1,4 +1,5 @@
-import 'package:expense_planner/transaction.dart';
+import 'package:expense_planner/models/transaction.dart';
+import 'package:expense_planner/widgets/chart.dart';
 import 'package:expense_planner/widgets/new_transaction.dart';
 import 'package:expense_planner/widgets/transaction_list.dart';
 import 'package:flutter/material.dart';
@@ -13,7 +14,19 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Expense Tracker',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.purple,
+        accentColor: Colors.amber,
+        fontFamily: 'Circular-Std-Book',
+        textTheme: ThemeData.light()
+            .textTheme
+            .copyWith(title: TextStyle(fontFamily: 'Gilroy', fontSize: 20)),
+        appBarTheme: AppBarTheme(
+            textTheme: ThemeData.light().textTheme.copyWith(
+                  title: TextStyle(
+                    fontFamily: 'Gilroy',
+                    fontSize: 20,
+                  ),
+                )),
       ),
       home: MyHomePage(),
     );
@@ -28,68 +41,14 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  final List<Transaction> _userTransactions = [
-    Transaction(
-      id: '1',
-      title: 'Transaction 1',
-      amount: 79.99,
-      date: DateTime.now(),
-    ),
-    Transaction(
-      id: '2',
-      title: 'Transaction 2',
-      amount: 49.99,
-      date: DateTime.now(),
-    ),
-    Transaction(
-      id: '3',
-      title: 'Transaction 3',
-      amount: 79.99,
-      date: DateTime.now(),
-    ),
-    Transaction(
-      id: '4',
-      title: 'Transaction 4',
-      amount: 49.99,
-      date: DateTime.now(),
-    ),
-    Transaction(
-      id: '5',
-      title: 'Transaction 5',
-      amount: 79.99,
-      date: DateTime.now(),
-    ),
-    Transaction(
-      id: '6',
-      title: 'Transaction 6',
-      amount: 49.99,
-      date: DateTime.now(),
-    ),
-    Transaction(
-      id: '7',
-      title: 'Transaction 7',
-      amount: 79.99,
-      date: DateTime.now(),
-    ),
-    Transaction(
-      id: '8',
-      title: 'Transaction 8',
-      amount: 49.99,
-      date: DateTime.now(),
-    ),
-    Transaction(
-      id: '9',
-      title: 'Transaction 9',
-      amount: 79.99,
-      date: DateTime.now(),
-    ),
-    Transaction(
-      id: '10',
-      title: 'Transaction 10',
-      amount: 49.99,
-      date: DateTime.now(),
-    ),
-  ];
+  final List<Transaction> _userTransactions = [];
+
+  List<Transaction> get _recentTransactions {
+    return _userTransactions.where((tx) {
+      return tx.date.isAfter(DateTime.now().subtract(Duration(days: 7)));
+    }).toList();
+  }
+
   void _addNewTransaction(String txTitle, double txAmount) {
     final newTx = Transaction(
       id: DateTime.now().toString(),
@@ -119,7 +78,10 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Kharcha Charcha'),
+        title: Text(
+          'Kharcha Charcha',
+          style: TextStyle(fontFamily: 'Gilroy'),
+        ),
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.add),
@@ -130,17 +92,9 @@ class _MyHomePageState extends State<MyHomePage> {
       body: SingleChildScrollView(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.end,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
-            Card(
-              child: Container(
-                margin: EdgeInsets.all(10),
-                width: double.infinity,
-                color: Colors.blue,
-                child: Text('Charts'),
-              ),
-              elevation: 10,
-            ),
+            Chart(this._userTransactions),
             Column(
               children: <Widget>[
                 TransactionList(this._userTransactions),
