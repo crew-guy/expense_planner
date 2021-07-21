@@ -22,11 +22,11 @@ class MyApp extends StatelessWidget {
             .copyWith(title: TextStyle(fontFamily: 'Gilroy', fontSize: 20)),
         appBarTheme: AppBarTheme(
             textTheme: ThemeData.light().textTheme.copyWith(
-                  title: TextStyle(
-                    fontFamily: 'Gilroy',
-                    fontSize: 20,
-                  ),
-                )),
+                title: TextStyle(
+                  fontFamily: 'Gilroy',
+                  fontSize: 20,
+                ),
+                button: TextStyle(color: Colors.white))),
       ),
       home: MyHomePage(),
     );
@@ -49,15 +49,22 @@ class _MyHomePageState extends State<MyHomePage> {
     }).toList();
   }
 
-  void _addNewTransaction(String txTitle, double txAmount) {
+  void _addNewTransaction(
+      String txTitle, double txAmount, DateTime dateChosen) {
     final newTx = Transaction(
       id: DateTime.now().toString(),
       title: txTitle,
       amount: txAmount,
-      date: DateTime.now(),
+      date: dateChosen,
     );
     setState(() {
       _userTransactions.add(newTx);
+    });
+  }
+
+  void _deleteTransaction(String id) {
+    setState(() {
+      this._userTransactions.removeWhere((tx) => tx.id == id);
     });
   }
 
@@ -97,7 +104,8 @@ class _MyHomePageState extends State<MyHomePage> {
             Chart(this._userTransactions),
             Column(
               children: <Widget>[
-                TransactionList(this._userTransactions),
+                TransactionList(
+                    this._userTransactions, this._deleteTransaction),
               ],
             ),
           ],
