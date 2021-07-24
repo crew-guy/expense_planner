@@ -9,8 +9,9 @@ class ChartBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return LayoutBuilder(builder: (ctx, constraint) {
-      return Column(
+    return LayoutBuilder(
+      builder: (ctx, constraint) {
+        return Column(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             Container(
@@ -25,22 +26,24 @@ class ChartBar extends StatelessWidget {
             Container(
               height: constraint.maxHeight * 0.6,
               width: 10,
-              child: Stack(children: [
-                Container(
-                  decoration: BoxDecoration(
-                      color: Color.fromRGBO(220, 220, 220, 1),
-                      border: Border.all(color: Colors.grey, width: 2),
-                      borderRadius: BorderRadius.circular(10)),
-                ),
-                FractionallySizedBox(
-                  heightFactor: this.spendingPctOfTotal,
-                  child: Container(
+              child: Stack(
+                children: [
+                  Container(
                     decoration: BoxDecoration(
-                        color: Theme.of(context).primaryColor,
+                        color: Color.fromRGBO(220, 220, 220, 1),
+                        border: Border.all(color: Colors.grey, width: 2),
                         borderRadius: BorderRadius.circular(10)),
                   ),
-                )
-              ]),
+                  FractionallySizedBox(
+                    heightFactor: this.spendingPctOfTotal,
+                    child: Container(
+                      decoration: BoxDecoration(
+                          color: Theme.of(context).primaryColor,
+                          borderRadius: BorderRadius.circular(10)),
+                    ),
+                  )
+                ],
+              ),
             ),
             SizedBox(
               height: constraint.maxHeight * 0.05,
@@ -49,7 +52,9 @@ class ChartBar extends StatelessWidget {
               height: constraint.maxHeight * 0.15,
               child: FittedBox(child: Text('${label}')),
             )
-          ]);
-    });
+          ],
+        );
+      },
+    );
   }
 }
