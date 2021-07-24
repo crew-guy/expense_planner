@@ -51,7 +51,7 @@ class ChartBar extends StatelessWidget {
             Container(
               height: constraint.maxHeight * 0.15,
               child: FittedBox(child: Text('${label}')),
-            )
+            ),
           ],
         );
       },
