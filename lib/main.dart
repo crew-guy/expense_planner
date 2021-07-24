@@ -131,6 +131,7 @@ class _MyHomePageState extends State<MyHomePage> {
           0.6,
       child: TransactionList(this._userTransactions, this._deleteTransaction),
     );
+
     final pageBody = SafeArea(
       child: SingleChildScrollView(
         child: Column(
