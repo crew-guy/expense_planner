@@ -30,12 +30,14 @@ class MyApp extends StatelessWidget {
             .textTheme
             .copyWith(title: TextStyle(fontFamily: 'Gilroy', fontSize: 20)),
         appBarTheme: AppBarTheme(
-            textTheme: ThemeData.light().textTheme.copyWith(
+          textTheme: ThemeData.light().textTheme.copyWith(
                 title: TextStyle(
                   fontFamily: 'Gilroy',
                   fontSize: 20,
                 ),
-                button: TextStyle(color: Colors.white))),
+                button: TextStyle(color: Colors.white),
+              ),
+        ),
       ),
       home: MyHomePage(),
     );
