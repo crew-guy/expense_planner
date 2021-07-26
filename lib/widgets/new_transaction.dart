@@ -28,8 +28,11 @@ class _NewTransactionState extends State<NewTransaction> {
       return;
     }
 
-    this.widget._addTx(_titleController.text,
-        double.parse(_amountController.text), this._selectedDate);
+    this.widget._addTx(
+          _titleController.text,
+          double.parse(_amountController.text),
+          this._selectedDate,
+        );
 
     Navigator.of(context).pop();
   }
