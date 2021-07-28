@@ -65,7 +65,6 @@ class _MyHomePageState extends State<MyHomePage> with WidgetsBindingObserver {
   void initState() {
     // TODO: implement initState
     WidgetsBinding.instance?.addObserver(this);
-
     super.initState();
   }
 
