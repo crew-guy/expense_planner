@@ -26,15 +26,14 @@ class MyApp extends StatelessWidget {
         accentColor: Colors.amber,
         errorColor: Colors.red,
         fontFamily: 'Circular-Std-Book',
-        textTheme: ThemeData.light()
-            .textTheme
-            .copyWith(title: TextStyle(fontFamily: 'Gilroy', fontSize: 20)),
+        textTheme: ThemeData.light().textTheme,
+        // .copyWith(title: TextStyle(fontFamily: 'Gilroy', fontSize: 20)),
         appBarTheme: AppBarTheme(
           textTheme: ThemeData.light().textTheme.copyWith(
-                title: TextStyle(
-                  fontFamily: 'Gilroy',
-                  fontSize: 20,
-                ),
+                // title: TextStyle(
+                //   fontFamily: 'Gilroy',
+                //   fontSize: 20,
+                // ),
                 button: TextStyle(color: Colors.white),
               ),
         ),
@@ -118,7 +117,7 @@ class _MyHomePageState extends State<MyHomePage> with WidgetsBindingObserver {
       Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text('Show Chart', style: Theme.of(context).textTheme.title),
+          // Text('Show Chart', style: Theme.of(context).textTheme.title),
           Switch.adaptive(
             activeColor: Theme.of(context).accentColor,
             value: _showChart,
